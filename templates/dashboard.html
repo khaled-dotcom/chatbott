@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{% endblock %}
+{% block content %}
+<div class="dashboard-container">
+    <div class="jumbotron bg-primary text-white p-6 rounded-3 mb-5">
+        <h1 class="display-3">Welcome to CuraBot</h1>
+        <p class="lead">Your advanced AI-powered medical assistant for diagnosis and analysis</p>
+        <hr class="my-4">
+        <p>Select a service below to get started.</p>
+    </div>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-comment-dots me-2"></i>Medical Chatbot</h5>
+                    <p class="card-text">Ask medical questions and get expert responses from our AI assistant.</p>
+                    <a href="{{ url_for('chatbot.chatbot') }}" class="btn btn-primary">Go to Chatbot</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-image me-2"></i>Image Generation</h5>
+                    <p class="card-text">Generate images based on disease symptoms using AI.</p>
+                    <a href="{{ url_for('image_gen.generate_image') }}" class="btn btn-primary">Go to Image Generation</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fas fa-brain me-2"></i>Brain Tumor Segmentation</h5>
+                    <p class="card-text">Upload brain scans for AI-powered tumor segmentation.</p>
+                    <a href="{{ url_for('segmentation.segmentation') }}" class="btn btn-primary">Go to Segmentation</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

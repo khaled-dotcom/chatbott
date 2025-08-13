@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Image Generation{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/image_gen.js') }}"></script>
+{% endblock %}
+{% block content %}
+<div class="image-gen-container">
+    <h1>Generate Medical Image</h1>
+    <p>Enter symptoms to generate a medical image using AI.</p>
+    <div class="form-card">
+        <form method="POST">
+            <textarea name="symptoms" placeholder="Enter symptoms (e.g., chest tightness, shortness of breath)" required></textarea>
+            <button type="submit">Generate Image</button>
+        </form>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+    {% if symptoms %}
+        <div id="image-output" class="output-card fade-in">
+            <div class="output-grid">
+                <div>
+                    <h2>User Input</h2>
+                    <p>{{ symptoms }}</p>
+                </div>
+                <div>
+                    <h2>Generated Image</h2>
+                    {% if image_path %}
+                        <img id="generated-image" src="{{ url_for('static', filename=image_path) }}" alt="Generated Medical Image" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+                        <p class="image-fallback" style="display: none;">Failed to load image. Please try again.</p>
+                    {% else %}
+                        <p class="error">No image was generated. Please try again.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

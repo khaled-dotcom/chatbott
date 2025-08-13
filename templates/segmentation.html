@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Brain Tumor Segmentation{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/segmentation.js') }}"></script>
+{% endblock %}
+{% block content %}
+<div class="segmentation-container">
+    <h1>Brain Tumor Segmentation</h1>
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+    <form id="segmentation-form" method="POST" enctype="multipart/form-data">
+        <label for="image">Upload Brain Scan Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <button type="submit">Segment Image</button>
+    </form>
+    {% if uploaded_image and segmented_image %}
+        <div class="image-display">
+            <div class="image-container">
+                <h2>Original Image</h2>
+                <img src="{{ url_for('static', filename='uploads/' + uploaded_image) }}" alt="Uploaded Image" class="segmented-image">
+            </div>
+            <div class="image-container">
+                <h2>Segmented Result</h2>
+                <img src="{{ url_for('static', filename='uploads/' + segmented_image) }}" alt="Segmented Image" class="segmented-image">
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

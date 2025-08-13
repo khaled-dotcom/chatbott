@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block scripts %}{% endblock %}
+</head>
+<body>
+    <nav>
+        <div class="logo">CuraBot</div>
+        <ul>
+            <li><a href="{{ url_for('dashboard.dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('chatbot.chatbot') }}">Medical Chatbot</a></li>
+            <li><a href="{{ url_for('image_gen.generate_image') }}">Image Generation</a></li>
+            <li><a href="{{ url_for('segmentation.segmentation') }}">Brain Tumor Segmentation</a></li>
+            {% if session.get('logged_in') %}
+                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+            {% else %}
+                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>© 2025 CuraBot. All rights reserved.</p>
+    </footer>
+</body>
+</html>

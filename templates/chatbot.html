@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Medical Chatbot{% endblock %}
+{% block scripts %}
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.0.0/marked.min.js"></script>
+    <script src="{{ url_for('static', filename='js/chatbot.js') }}"></script>
+{% endblock %}
+{% block content %}
+<div class="chatbot-container">
+    <h1>Medical Chatbot</h1>
+    <p>Ask medical questions by typing or speaking. Click "Record" to use voice input.</p>
+    <div id="chat-output" class="border rounded p-3 mb-3"></div>
+    <div class="chat-input d-flex align-items-center">
+        <textarea id="user-input" placeholder="Type or speak your question..." rows="4"></textarea>
+        <div class="button-group d-flex flex-column">
+            <button id="record-btn" class="btn btn-outline-primary" title="Click to start/stop recording">Record</button>
+            <button onclick="sendMessage()" class="btn btn-primary">Send</button>
+        </div>
+    </div>
+    <div id="recording-status" class="recording-status mt-2" style="display: none;">Recording...</div>
+</div>
+{% endblock %}
